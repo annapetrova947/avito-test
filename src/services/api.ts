@@ -1,4 +1,4 @@
-import { ApiResponse, ApiResponseReview, Movie, Review } from "./../utils/types";
+import { ApiResponse, ApiResponseReview, ApiResponseSeasons, Movie } from "./../utils/types";
 import { store } from "./../index";
 import {BASE_URL} from './../const/const'
 
@@ -65,7 +65,7 @@ export function getMovies(): Promise<ApiResponse> {
 
 export function getMovieDetails(id: number){
   const token: string | undefined = process.env.REACT_APP_TOKEN;
-  const url = new URL(`https://api.kinopoisk.dev/v1.4/movie/${id}`);
+  const url = new URL(`${BASE_URL}movie/${id}`);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: "GET",
@@ -91,7 +91,7 @@ export function getMovieDetails(id: number){
 
 export function getMovieReview(id: number, page: number){
   const token: string | undefined = process.env.REACT_APP_TOKEN;
-  const url = new URL(`https://api.kinopoisk.dev/v1.4/review?movieId=${id}&page=${page}`);
+  const url = new URL(`${BASE_URL}review?movieId=${id}&page=${page}`);
   
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -119,7 +119,7 @@ export function getMovieReview(id: number, page: number){
 
 export function getEpisodes(id: number){
   const token: string | undefined = process.env.REACT_APP_TOKEN;
-  const url = new URL(`https://api.kinopoisk.dev/v1.4/season?movieId=${id}&limit=100`);
+  const url = new URL(`${BASE_URL}season?movieId=${id}&limit=100`);
   
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -134,7 +134,7 @@ export function getEpisodes(id: number){
         }
         return response.json();
       })
-      .then((data: ApiResponseReview) => {
+      .then((data: ApiResponseSeasons) => {
         resolve(data);
       })
       .catch((error) => {
