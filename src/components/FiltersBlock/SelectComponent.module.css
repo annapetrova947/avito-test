@@ -1,0 +1,32 @@
+.select_component{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 1140px;
+    margin: 20px auto;
+}
+
+.label {
+    margin-bottom: 10px;
+    width: 200px;
+
+}
+
+.select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+@media (max-width: 1279px) {
+    .select_component{
+        width: 354px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .select_component{
+        width: 300px;
+    }
+  }

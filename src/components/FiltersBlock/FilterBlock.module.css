@@ -1,0 +1,24 @@
+.filter_block{
+    display: flex;
+    width: 1140px;
+    margin: 20px auto;
+}
+
+@media (max-width: 1279px) {
+    .filter_block{
+        width: 767px;
+        display: grid;
+        grid-template-columns: repeat(2, 354px);
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .filter_block{
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+  }
