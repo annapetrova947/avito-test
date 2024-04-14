@@ -1,4 +1,4 @@
-import { SelectComponent } from "./SelectComponent";
+import { SelectComponent } from "../SelectComponent/SelectComponent";
 import React, { useState } from "react";
 import { countries, ages, years, itemsPerPage } from "./../../const/const";
 import { useDispatch, useSelector } from "react-redux";

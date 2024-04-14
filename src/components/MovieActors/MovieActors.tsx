@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Actor} from './../../utils/types'
+import {Actor} from '../../utils/types'
 import styles from './MovieActors.module.css'
 
 export function MovieActors(props: {actors: Actor[]}){
@@ -18,7 +18,7 @@ export function MovieActors(props: {actors: Actor[]}){
         <div className={styles.actors}>
       <h2 className={styles.title}>Список актеров</h2>
       <ul className={styles.list}>
-        {currentActors.map((actor, index) => (
+        {currentActors.length !== 0 ? currentActors.map((actor, index) => (
           <div key={index} className={styles.actor}>
                 <img src={actor.photo} className={styles.photo} alt='Фото актера'/>
             <div>
@@ -26,7 +26,7 @@ export function MovieActors(props: {actors: Actor[]}){
             <p>{actor.description}</p>
           </div>
           </div>
-        ))}
+        )) : <p>Нет информации об актерах</p>}
       </ul>
       {
         props.actors.length > 10 ?

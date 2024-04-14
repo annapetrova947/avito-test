@@ -27,6 +27,24 @@
     height: 400px;
 }
 
+.back {
+    background-image: url('./../../images/free-icon-back-3114883.png');
+  background-size: cover;
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+.not_found{
+    text-align: center;
+}
+
 @media (max-width: 1279px) {
     .info{
         width: 767px;

@@ -39,7 +39,9 @@ export function SimilarMovies (props: {movies: Movie[]}) {
       props.movies ? 
       <>
       <h2 className='sim'>Похожие фильмы</h2>
-      <Slider {...settings}>
+      {
+        props.movies.length !== 0 ? 
+        <Slider {...settings}>
       {props.movies.map((movie, index) => (
         <Link to={`/movies/${movie.id}`} key={movie.id} className='movie_link'>
         <div className='movie'>
@@ -48,7 +50,10 @@ export function SimilarMovies (props: {movies: Movie[]}) {
         </div>
       </Link>
       ))}
-    </Slider>
+    </Slider> :
+    <p>Нет информации о похожих фильмах</p>
+      }
+      
       </>
        : ''
     }

@@ -48,6 +48,18 @@ export interface ApiResponseReview {
   docs: Review[];
 }
 
+export interface Episode {
+  number: number;
+  name: string
+}
+
+export interface Season {
+  id: string;
+  episodes: Episode[];
+  name: string
+
+}
+
 export interface Filters {
   country: string;
   age: string;

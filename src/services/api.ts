@@ -89,9 +89,9 @@ export function getMovieDetails(id: number){
 }
 
 
-export function getMovieReview(id: number){
+export function getMovieReview(id: number, page: number){
   const token: string | undefined = process.env.REACT_APP_TOKEN;
-  const url = new URL(`https://api.kinopoisk.dev/v1.4/review?movieId=${id}`);
+  const url = new URL(`https://api.kinopoisk.dev/v1.4/review?movieId=${id}&page=${page}`);
   
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -107,7 +107,35 @@ export function getMovieReview(id: number){
         return response.json();
       })
       .then((data: ApiResponseReview) => {
-        resolve(data.docs);
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+
+}
+
+
+export function getEpisodes(id: number){
+  const token: string | undefined = process.env.REACT_APP_TOKEN;
+  const url = new URL(`https://api.kinopoisk.dev/v1.4/season?movieId=${id}&limit=100`);
+  
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "X-API-KEY": `${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Попробуйте еще раз");
+        }
+        return response.json();
+      })
+      .then((data: ApiResponseReview) => {
+        resolve(data);
       })
       .catch((error) => {
         reject(error);

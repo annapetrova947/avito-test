@@ -42,6 +42,8 @@ export function getItems() {
           });
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => dispatch({
+        type: GET_ITEMS_FAILED,
+      }));
   };
 }

@@ -1,28 +1,15 @@
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "./../../services/reducers/rootReducer";
-import { getItems } from "../../services/actions/movies";
-import { updateCurrentPage } from './../../services/actions/pageOptions';
+
 import {generatePageRange} from './../../utils/functions'
 import styles from './Pagination.module.css';
 
-export function Pagination() {
+interface PaginationInterface {
+    totalPages: number;
+    currentPage: number;
+    handlePageClick: (pageNumber: number) => void;
+}
 
-    const dispatch = useDispatch()
+export function Pagination({totalPages, currentPage, handlePageClick}: PaginationInterface) {
     
-    const { totalPages }: any = useSelector(
-        (store: RootState) => store.movies,
-      );
-
-      const { currentPage }: any = useSelector(
-        (store: RootState) => store.pageOptions.options,
-      );
-
-  const handlePageClick = (pageNumber: number) => {
-    dispatch(updateCurrentPage({
-        currentPage: pageNumber
-    }))
-    getItems()(dispatch);
-  };
 
   return (
     <div className={styles.container}>

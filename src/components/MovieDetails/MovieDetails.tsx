@@ -6,14 +6,21 @@ import type { AppDispatch } from './../../index'
 import { RootState } from "../../services/reducers/rootReducer";
 import styles from './MovieDetails.module.css';
 import Preloader from '../Preloader/Preloader';
-import {MovieActors} from './MovieActors'
-import { SimilarMovies } from './SimilarMovies'
-import {Reviews} from './Reviews';
+import {MovieActors} from '../MovieActors/MovieActors'
+import { SimilarMovies } from './../SimilarMovies/SimilarMovies'
+import {Reviews} from '../Reviews/Reviews';
+import {Episods} from '../Episods/Episodes';
+import { useNavigate } from 'react-router-dom';
 
 
 export function MovieDetails() {
    
   const { id } = useParams();
+  const navigate = useNavigate();
+  
+  const handleBack = () => {
+    navigate('/');
+  };
 
   const useAppDispatch = useDispatch.withTypes<AppDispatch>()
   const dispatch = useAppDispatch()
@@ -26,11 +33,12 @@ export function MovieDetails() {
     (store: RootState) => store.movieDetails,
   );
 
-
-  if (itemsFailed) return <div>Movie not found</div>;
-
+ 
   return (
     <>
+    <div>
+      <button onClick={handleBack} className={styles.back}></button>
+    </div>
     {Object.keys(item).length !== 0 ? 
     <div className={styles.info}>
       <div className={styles.details}>
@@ -39,7 +47,7 @@ export function MovieDetails() {
                 <h2 className={styles.title}>{item.name}</h2>
                 <p>{item.description}</p>
                 <div>
-                    <p>Рейтинг</p>
+                    <h3>Рейтинг</h3>
                     {Object.keys(item.rating).map((key) => {
                     if (item.rating[key] !== null) {
                     return (
@@ -49,12 +57,7 @@ export function MovieDetails() {
                 return null;
             })}
                 </div>
-                {item.seasonsInfo.length !== 0 ? 
-            <div>
-                <p>Сезоны и серии</p>
-                <p>Сезонов: {item.seasonsInfo.length}</p>
-                <p>Серии по {item.seriesLength} м.</p>
-            </div> : ''}
+            <Episods id={Number(id)}/>
             </div>
             <MovieActors actors={item.persons}/>
             </div>
@@ -63,7 +66,7 @@ export function MovieDetails() {
         
     </div>
          : itemsRequest ?
-        <Preloader/> : ''}
+        <Preloader/> : itemsFailed ? <h3 className={styles.not_found}>Такого фильма нет :(</h3> : ''}
         
     </>
     

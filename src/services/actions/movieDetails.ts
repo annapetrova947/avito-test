@@ -42,6 +42,8 @@ export function getDetails(id: number) {
           });
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => dispatch({
+        type: GET_DETAILS_FAILED,
+      }));
   };
 }
